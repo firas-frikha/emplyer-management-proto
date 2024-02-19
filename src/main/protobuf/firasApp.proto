@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+
+import "google/protobuf/empty.proto";
+
+package EmployerManagement;
+
+service EmployerManagementService {
+  rpc AddEmployer(AddEmployerRequest) returns (AddEmployerResponse) {}
+  rpc FetchAllEmployers(google.protobuf.Empty) returns (FetchAllEmployerResponse) {}
+  rpc FetchEmployerByName(FetchEmployerByNameRequest) returns (FetchEmployerByNameResponse) {}
+  rpc UpdateEmployerEmail(UpdateEmployerEmailRequest) returns (google.protobuf.Empty) {}
+  rpc DeleteEmployer(DeleteEmployerRequest) returns (google.protobuf.Empty) {}
+}
+
+message AddEmployerRequest {
+  string firstName = 1;
+  string lastName = 2;
+  string email = 3;
+  int64 phoneNumber = 4;
+  string origin = 5;
+}
+
+message AddEmployerResponse {
+  string employerId = 1;
+}
+
+message FetchAllEmployerResponse {
+  repeated EmployerDetails employerDetails = 1;
+}
+
+message EmployerDetails {
+  string employerId = 1;
+  string firstName = 2;
+  string lastName = 3;
+  string email = 4;
+  int64 phoneNumber = 5;
+}
+
+message FetchEmployerByNameRequest {
+  string name = 1;
+}
+
+message FetchEmployerByNameResponse {
+  EmployerDetails employerDetail = 1;
+}
+
+message UpdateEmployerEmailRequest {
+  string newEmail = 1;
+}
+
+message DeleteEmployerRequest {
+  string employerId = 1;
+}
